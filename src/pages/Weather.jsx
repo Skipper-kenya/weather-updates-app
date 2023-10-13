@@ -11,6 +11,7 @@ const Weather = () => {
     useContext(Context);
 
   const [city, setCity] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [params, setParams] = useState({
     description: "",
@@ -28,8 +29,8 @@ const Weather = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
-        //process.env.REACT_APP_API_URL_DEFAULT
         const response = await axios.get(
           `${api_url}&appid=${process.env.REACT_APP_API_KEY}&q=nairobi`
         );
@@ -44,7 +45,9 @@ const Weather = () => {
           humidity: main.humidity,
           description: weather[0].description,
         });
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log("error at useffect hook");
       }
     };
@@ -53,7 +56,7 @@ const Weather = () => {
 
   const handleFetchWeather = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const response = await axios.get(
         `${api_url}&appid=${process.env.REACT_APP_API_KEY}&q=${city}`
@@ -68,9 +71,10 @@ const Weather = () => {
         wind: wind.speed,
         humidity: main.humidity,
       });
-
+      setLoading(false);
       setCity("");
     } catch (error) {
+      setLoading(false);
       setAlertMessage("Sorry we could not find your area.");
       setTimeout(() => {
         setAlertMessage("");
@@ -102,46 +106,53 @@ const Weather = () => {
     <div className="weather-wrapper">
       <h3>rastaTech weather updates</h3>
       <div className="weather">
-        <div className="alert">{alert_message}</div>
-        <div className="top-inputs">
-          <form onSubmit={handleFetchWeather}>
-            <input
-              type="text"
-              placeholder="country,city,town name..."
-              required
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              spellCheck="false"
-            />
-            <button type="submit">
-              <MagnifyingGlass size={30} />
-            </button>
-          </form>
-        </div>
-
-        <div className="desc">{params.description}</div>
-
-        <div className="mid-info">
-          {weatherIcon(params.conditionIcon)}
-          <p>{params.temp} &deg;C</p>
-          <p>{params.cityName}</p>
-        </div>
-        <div className="bottom-info">
-          <div className="card">
-            <img src={wind} alt="" />
-            <div>
-              <small>Windspeed</small>
-              <p>{params.wind}km/h </p>
-            </div>
+        {loading ? (
+          <div className="loading">
+            <div className="load"></div>
           </div>
-          <div className="card">
-            <img src={humidity} alt="" />
-            <div>
-              <small>Humidity</small>
-              <p>{params.humidity}%</p>
+        ) : (
+          <>
+            <div className="alert">{alert_message}</div>
+            <div className="top-inputs">
+              <form onSubmit={handleFetchWeather}>
+                <input
+                  type="text"
+                  placeholder="country,city,town name..."
+                  required
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  spellCheck="false"
+                />
+                <button type="submit">
+                  <MagnifyingGlass size={30} />
+                </button>
+              </form>
             </div>
-          </div>
-        </div>
+            <div className="desc">{params.description}</div>
+
+            <div className="mid-info">
+              {weatherIcon(params.conditionIcon)}
+              <p>{params.temp} &deg;C</p>
+              <p>{params.cityName}</p>
+            </div>
+            <div className="bottom-info">
+              <div className="card">
+                <img src={wind} alt="" />
+                <div>
+                  <small>Windspeed</small>
+                  <p>{params.wind}km/h </p>
+                </div>
+              </div>
+              <div className="card">
+                <img src={humidity} alt="" />
+                <div>
+                  <small>Humidity</small>
+                  <p>{params.humidity}%</p>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
