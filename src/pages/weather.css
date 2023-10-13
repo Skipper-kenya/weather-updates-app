@@ -1,0 +1,105 @@
+.weather-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgb(72, 66, 66);
+  color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: auto;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.weather-wrapper h3 {
+  margin: 2rem 0;
+  letter-spacing: 1px;
+  font-family: arial;
+}
+.weather {
+  box-shadow: 0 2px 7px;
+  padding: 10px;
+  border-radius: 7px;
+  width: 400px;
+  height: auto;
+  position: relative;
+}
+.alert{
+  top: 0;
+  position: absolute;
+  left: 10%;
+  color: red;
+}
+.top-inputs form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  margin: 0.5rem 0rem;
+  height: auto;
+}
+.top-inputs input {
+  padding: 10px;
+  width: 87.5%;
+  border: 2px solid transparent;
+  outline: 0;
+  border-top: none;
+  font-size: 18px;
+}
+.top-inputs input:focus {
+  border-color: orangered;
+}
+.top-inputs button {
+  width: 12%;
+  overflow: hidden;
+  background-color: seagreen;
+  border: 0;
+  color: white;
+}
+.top-inputs button:hover {
+  cursor: pointer;
+  background-color: green;
+  transition: 0.3s;
+}
+.mid-info {
+  width: 100%;
+  height: auto;
+  display: flex;
+  min-height: 100px;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0.5rem 0;
+  font-size: 20px;
+  border-bottom: 2px dotted white;
+}
+.mid-info img {
+  width: 100px;
+}
+.bottom-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.card {
+  display: flex;
+  width: 49%;
+  justify-content: center;
+}
+.card img {
+  margin-right: 0.5rem;
+  width: 40px;
+}
+.card small {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.card p {
+  font-size: 20px;
+}
+.desc {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 18px;
+  font-style: italic;
+  color: orange;
+}
