@@ -13,6 +13,9 @@ const Weather = () => {
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
 
+  //object notation for details
+
+  
   const [params, setParams] = useState({
     description: "",
     conditionIcon: "",
