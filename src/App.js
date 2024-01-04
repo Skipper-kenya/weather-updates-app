@@ -4,6 +4,7 @@ import GlobalProvider from "./context/GlobalProvider";
 //dev
 //to check
 function App() {
+  //destination 
   return (
     <GlobalProvider>
       <>
