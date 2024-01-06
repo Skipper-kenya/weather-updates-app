@@ -56,7 +56,7 @@ const Weather = () => {
     };
     fetchData();
   }, []);
-
+//fetch weather widget
   const handleFetchWeather = async (e) => {
     e.preventDefault();
     setLoading(true);
